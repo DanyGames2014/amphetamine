@@ -5,12 +5,13 @@
   "name": "Amphetamine",
   "description": "Additional settings and optimizations for beta that allow for smoother experience!",
   "authors": [
-    "mine_diver"
+    "mine_diver",
+    "crinkle_cut",
+    "DanyGames2014"
   ],
   "contact": {
-    "homepage": "https://glass-repo.net/repo/mod/amphetamine",
-    "sources": "https://github.com/mineLdiver/amphetamine",
-    "issues": "https://github.com/mineLdiver/amphetamine/issues"
+    "sources": "https://github.com/DanyGames2014/amphetamine",
+    "issues": "https://github.com/DanyGames2014/amphetamine/issues"
   },
   "license": "CC0-1.0",
   "icon": "assets/amphetamine/icon.png",
