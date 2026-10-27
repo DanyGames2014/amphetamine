@@ -7,6 +7,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
+import net.modificationstation.stationapi.api.util.Identifier;
+import net.modificationstation.stationapi.api.util.Util;
 
 import java.lang.invoke.LambdaMetafactory;
 import java.lang.invoke.MethodHandle;
@@ -21,22 +23,17 @@ public class SmoothEntityRegistry {
 
     private static final Function<World, Entity> EMPTY_CONSTRUCTOR = level -> null;
     private static final Map<String, Function<World, Entity>> STRING_ID_TO_CONSTRUCTOR = new HashMap<>();
-    private static final Int2ObjectMap<Function<World, Entity>> ID_TO_CONSTRUCTOR;
-
-    static {
-        Int2ObjectOpenHashMap<Function<World, Entity>> map = new Int2ObjectOpenHashMap<>();
-        map.defaultReturnValue(EMPTY_CONSTRUCTOR);
-        ID_TO_CONSTRUCTOR = map;
-    }
+    private static final Int2ObjectMap<Function<World, Entity>> ID_TO_CONSTRUCTOR = Util.make(new Int2ObjectOpenHashMap<>(), map -> map.defaultReturnValue(EMPTY_CONSTRUCTOR));
 
     private static Function<World, Entity> findConstructor(Class<? extends Entity> entityClass) throws Throwable {
         MethodHandles.Lookup lookup = MethodHandles.lookup();
         MethodHandle mh = lookup.findConstructor(entityClass, methodType(void.class, World.class));
-        // noinspection unchecked
+        //noinspection unchecked
         return (Function<World, Entity>) LambdaMetafactory.metafactory(
                 lookup,
                 "apply", methodType(Function.class),
-                mh.type().generic(), mh, mh.type()).getTarget().invokeExact();
+                mh.type().generic(), mh, mh.type()
+        ).getTarget().invokeExact();
     }
 
     public static void register(Class<? extends Entity> entityClass, String identifier, int id) {
@@ -50,9 +47,9 @@ public class SmoothEntityRegistry {
         ID_TO_CONSTRUCTOR.put(id, constructor);
     }
 
-    public static void registerNoID(Class<? extends Entity> entityClass, String identifier) {
+    public static void register(Class<? extends Entity> entityClass, Identifier identifier) {
         try {
-            STRING_ID_TO_CONSTRUCTOR.put(identifier, findConstructor(entityClass));
+            STRING_ID_TO_CONSTRUCTOR.put(identifier.toString(), findConstructor(entityClass));
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
