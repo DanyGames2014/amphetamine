@@ -1,4 +1,4 @@
-package net.mine_diver.amphetamine.mixin;
+package net.mine_diver.amphetamine.mixin.chunkcache;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.world.World;

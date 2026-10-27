@@ -3,28 +3,29 @@
   "minVersion": "0.8",
   "package": "net.mine_diver.amphetamine.mixin",
   "plugin": "net.mine_diver.amphetamine.mixin.AmphetamineMixinPlugin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "client": [
     "client.BlockEntityFrustumCullingMixin",
     "client.FrustumDataMixin",
     "client.HudRenderMixin",
     "client.MixinEntityRendererDispatcher",
+    "client.MixinTileEntityRenderDispatcher",
     "client.SignBlockEntityRendererMixin",
     "client.SkyVboMixin",
     "client.TextRendererMixin",
-    "client.MixinTileEntityRenderDispatcher",
     "client.multidraw.ChunkRendererMixin",
     "client.multidraw.GameRendererMixin",
     "client.multidraw.RenderListAccessor",
     "client.multidraw.RenderListMixin",
-    "client.multidraw.compat.StationTessellatorImplMixin",
     "client.multidraw.TessellatorMixin",
     "client.multidraw.WorldRendererMixin",
+    "client.multidraw.compat.StationTessellatorImplMixin",
     "client.multidraw.nop.ChunkRendererMixin"
   ],
   "mixins": [
-    "MixinServerChunkCache",
-    "entity.MixinEntityRegistry"
+    "chunkcache.MixinServerChunkCache",
+    "entity.MixinEntityRegistry",
+    "entity.compat.stationentities.EntityRegisterEventMixin"
   ],
   "injectors": {
     "defaultRequire": 1
