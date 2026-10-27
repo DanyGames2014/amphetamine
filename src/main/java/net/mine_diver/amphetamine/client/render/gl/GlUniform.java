@@ -107,7 +107,7 @@ public class GlUniform extends Uniform implements AutoCloseable {
 	}
 
 	public final void set(Vec3f vector) {
-		this.set(vector.getX(), vector.getY(), vector.getZ());
+		this.set(vector.x, vector.y, vector.z);
 	}
 
 	public final void setForDataType(float value1, float value2, float value3, float value4) {
